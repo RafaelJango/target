@@ -3,23 +3,24 @@ import { colors, fontFamily } from "@/theme";
 
 export const styles = StyleSheet.create({
   container: {
-    paddingVertical: 16,
+    height: 42,
+    width: "100%",
     flexDirection: "row",
-    alignItems: "center",
-    gap: 7,
+    backgroundColor: colors.gray[100],
+    borderRadius: 8,
+    overflow: "hidden",
   },
-  info: {
+  option: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    borderRadius: 8,
     gap: 7,
   },
-  value: {
+  title: {
     fontSize: 14,
     fontFamily: fontFamily.medium,
-    color: colors.black,
-  },
-  description: {
-    fontSize: 12,
-    fontFamily: fontFamily.regular,
     color: colors.gray[500],
   },
 });

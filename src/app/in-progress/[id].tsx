@@ -4,7 +4,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { PageHeader } from "@/components/Page Header";
 import { Progress } from "@/components/Progress";
 import { List } from "@/components/List";
-import { Transaction } from "@/components/transaction";
+import { Transaction } from "@/components/Transaction";
 
 import { TransactionTypes } from "@/utils/TransactionTypes";
 import { Button } from "@/components/Button";
