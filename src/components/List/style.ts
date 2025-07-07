@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     color: colors.black,
   },
   empty: {
+    marginTop: 24,
     fontSize: 14,
     color: colors.gray[600],
     fontFamily: fontFamily.regular,

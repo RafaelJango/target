@@ -3,7 +3,7 @@ import { ActivityIndicator } from "react-native";
 import { styles } from "./styles";
 import { colors } from "@/theme/colors";
 
-export default function Loading() {
+export function Loading() {
   return (
     <ActivityIndicator
       size={"large"}
