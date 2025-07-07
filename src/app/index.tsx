@@ -1,32 +1,26 @@
-import { useState, useCallback } from "react";
-import { View, StatusBar, Alert } from "react-native";
-import { router, useFocusEffect } from "expo-router";
-
-import { List } from "@/components/List";
 import { Button } from "@/components/Button";
+import { HomeHeader, HomeHeaderProps } from "@/components/HomeHeader";
+import { List } from "@/components/List";
 import { Loading } from "@/components/Loading";
-import { HomeHeader } from "@/components/HomeHeader";
 import { Target, TargetProps } from "@/components/Target";
-
-import { numberToCurrency } from "@/utils/numberToCurrency";
-
 import { useTargetDatabase } from "@/database/useTargetDatabase";
-
-const summary = {
-  total: "R$ 2.680,00",
-  input: { label: "Entradas", value: "R$ 6,184.90" },
-  output: { label: "Saídas", value: "-R$ 883.90" },
-};
+import { useTransactionsDatabase } from "@/database/useTransactionsDatabase";
+import { numberToCurrency } from "@/utils/numberToCurrency";
+import { router, useFocusEffect } from "expo-router";
+import { useCallback, useState } from "react";
+import { Alert, StatusBar, View } from "react-native";
 
 export default function Index() {
+  const [summary, setSummary] = useState<HomeHeaderProps>();
   const [isFetching, setIsFetching] = useState(true);
   const [targets, setTargets] = useState<TargetProps[]>([]);
 
   const targetDatabase = useTargetDatabase();
+  const transactionsDatabase = useTransactionsDatabase();
 
   async function fetchTargets(): Promise<TargetProps[]> {
     try {
-      const response = await targetDatabase.listBySavedValue();
+      const response = await targetDatabase.listByPercentageValue();
       return response.map((item) => ({
         id: String(item.id),
         name: item.name,
@@ -35,17 +29,44 @@ export default function Index() {
         target: numberToCurrency(item.amount),
       }));
     } catch (error) {
-      Alert.alert("Error", "Não foi possível carregar as metas ");
+      Alert.alert("Erro", "Não foi possível carregar as metas.");
+      console.log(error);
+    }
+  }
+
+  async function fetchSummary(): Promise<HomeHeaderProps> {
+    try {
+      const response = await transactionsDatabase.summary();
+
+      return {
+        total: numberToCurrency(response.input + response.output),
+        input: {
+          label: "Entradas",
+          value: numberToCurrency(response.input),
+        },
+        output: {
+          label: "Saídas",
+          value: numberToCurrency(response.output),
+        },
+      };
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível carregar o resumo.");
       console.log(error);
     }
   }
 
   async function fetchData() {
-    const targetDataPromisse = fetchTargets();
+    const targetDataPromise = fetchTargets();
+    const dataSummaryPromise = fetchSummary();
 
-    const [targetData] = await Promise.all([targetDataPromisse]);
+    const [targetData, dataSummary] = await Promise.all([
+      targetDataPromise,
+      dataSummaryPromise,
+    ]);
 
     setTargets(targetData);
+    setSummary(dataSummary);
+
     setIsFetching(false);
   }
 
@@ -70,15 +91,16 @@ export default function Index() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Target
-            onPress={() => router.navigate(`/in-progress/${item.id}`)}
             data={item}
+            onPress={() => router.navigate(`/in-progress/${item.id}`)}
           />
         )}
-        emptyMessage="Nenhuma meta. Toque em nova meta para criar"
+        emptyMessage="Nenhuma meta. Toque em nova meta para criar."
         containerStyle={{ paddingHorizontal: 24 }}
       />
+
       <View style={{ padding: 24, paddingBottom: 32 }}>
-        <Button title="Nova Meta" onPress={() => router.navigate("/target")} />
+        <Button title="Nova meta" onPress={() => router.navigate("/target")} />
       </View>
     </View>
   );

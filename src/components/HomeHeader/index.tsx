@@ -1,11 +1,9 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Text, View } from "react-native";
-
-import { Summary, SummaryProps } from "../Summary";
-import { Separator } from "../Separator";
-
 import { styles } from "./styles";
 import { colors } from "@/theme/colors";
+import { Text, View } from "react-native";
+import { Separator } from "../Separator";
+import { Summary, SummaryProps } from "../Summary";
 
 export type HomeHeaderProps = {
   total: string;
@@ -27,12 +25,15 @@ export function HomeHeader({ data }: Props) {
         <Text style={styles.label}>Total que você possui</Text>
         <Text style={styles.total}>{data.total}</Text>
       </View>
+
       <Separator color={colors.blue[400]} />
+
       <View style={styles.summary}>
         <Summary
           data={data.input}
           icon={{ name: "arrow-upward", color: colors.green[500] }}
         />
+
         <Summary
           isRight
           data={data.output}
