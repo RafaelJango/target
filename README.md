@@ -1,7 +1,6 @@
 # Projeto Target 🎯
 
-O **Projeto Target** é uma base sólida para o desenvolvimento de um aplicativo mobile, projetado para funcionar tanto em plataformas **Android** quanto **iOS**. Construído com a flexibilidade do **React Native** e impulsionado pelo **Expo**, este repositório serve como um *boilerplate* ou ponto de partida para projetos que buscam uma arquitetura bem definida e o uso de múltiplas tecnologias para diferentes camadas da aplicação. Ele reflete a exploração de diversas linguagens e boas práticas em um ecossistema mobile complexo.
-
+O **Projeto Target** é uma base sólida para o desenvolvimento de um aplicativo mobile, projetado para funcionar tanto em plataformas **Android** quanto **iOS**. Construído com a flexibilidade do **React Native** e impulsionado pelo **Expo**.
 ## 🌟 Potenciais Funcionalidades / Capacidades da Estrutura
 
 Embora o propósito final do "Target" seja flexível, sua estrutura já aponta para um aplicativo com as seguintes capacidades e focos:
