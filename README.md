@@ -19,6 +19,7 @@ Este projeto abraça um conjunto diversificado de tecnologias para construir um 
 * **React Native:** Framework essencial para o desenvolvimento do frontend mobile, permitindo código único para iOS e Android.
 * **Expo:** Ferramenta que acelera o desenvolvimento e facilita a prototipagem, testes e builds do aplicativo.
 * **TypeScript:** Superconjunto do JavaScript que adiciona tipagem estática, garantindo maior segurança e manutenibilidade ao código-fonte.
+* **SQLite:** Solução de banco de dados local leve e poderosa, utilizada para armazenamento persistente de dados no dispositivo, essencial para aplicações que precisam funcionar offline ou manipular dados estruturados com desempenho.
 
 ## 🧠 Aprendizados e Áreas de Exploração
 
